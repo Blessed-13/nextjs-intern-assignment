@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nextjs-app
-          image: ghcr.io/blessed-13/nextjs-app:v1  # use your pushed image
+          image: ghcr.io/blessed-13/nextjs-app:v1
           ports:
             - containerPort: 3000
