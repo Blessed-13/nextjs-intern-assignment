@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nextjs-app
 spec:
-  replicas: 1
+  replicas: 2                       # number of pods
   selector:
     matchLabels:
       app: nextjs-app
@@ -16,6 +16,18 @@ spec:
     spec:
       containers:
         - name: nextjs-app
-          image: ghcr.io/blessed-13/nextjs-app:v1
+          image: ghcr.io/blessed-13/nextjs-app:v1   # GHCR image
           ports:
             - containerPort: 3000
+          readinessProbe:                          # checks if app is ready
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:                           # checks if app is alive
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
